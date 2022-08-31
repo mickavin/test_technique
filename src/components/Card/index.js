@@ -11,7 +11,6 @@ import Like from "components/Like";
 export default (props) => {
     const item = props?.item
     const [image, setImage] = useState('')
-    const [isNotLoad, setIsNotLoad] = useState(false)
 
     useEffect(() => {
         fetchImage()
@@ -26,13 +25,13 @@ export default (props) => {
             const arr = await response.json()
             setImage(arr[0]?.url)
         } catch (e){
-            setIsNotLoad(true)
+            setImage(noImage)
         }
     }
 
     return (
         <div className="col col-md-2 col-lg-4">
-            <div className="card card-movie">
+            <a onClick={() => props?.setInfo({...item, image})} className="card card-movie">
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
                         <div className="card-thumb">
@@ -42,13 +41,6 @@ export default (props) => {
                                     src={image}
                                     alt="img"
                                     className="card-img-top h-100 w-100"
-                                />
-                                : isNotLoad ?
-                                <img
-                                    src={noImage}
-                                    alt="img"
-                                    className="card-img-top h-100 w-100"
-                                    style={{marginTop: "-70px"}}
                                 />
                                 :
                                 <div className="divLoaderView">
@@ -92,7 +84,7 @@ export default (props) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     )
 }

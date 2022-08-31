@@ -1,22 +1,24 @@
-import { useEffect, useState } from "react";
-import Card from '../../components/Card';
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import films from '../../data/list-de-films';
-import './style.css';
-import { moviesStyle, inputStyle } from "styles"; 
 import SimpleInput from 'components/SimpleInput';
+import SimpleSelect from "components/SimpleSelect";
+import Card from '../../components/Card';
+import Modal from "components/Modal";
 import search from "utils/search";
 import sort from "utils/sort";
-import SimpleSelect from "components/SimpleSelect";
 import SORT_LABELS from "constants/sortLabels";
-import { useSelector, useDispatch } from 'react-redux'
 import { toggleAction } from "store/actions/toggleAction";
+import { inputStyle } from "styles"; 
+import './style.css';
 
 const MoviesList = () => {
     const likes = useSelector(state => state.like.likedMovies)
     const dispatch = useDispatch()
-
     const [searchText, setSearchText] = useState('')
     const [sortType, setSortType] = useState('alphabetic')
+    const [info, setInfo] = useState(null)
+
     const filteredElements = () => {
         let movies = search(searchText, films, [{type: 'number', key: 'id'}, {type: 'text', key: 'original_title'}, {type: 'text', key: 'overview'}])
         if(sortType == 'alphabetic'){
@@ -36,6 +38,14 @@ const MoviesList = () => {
     }
 
     const toggleLike = (id) => dispatch(toggleAction(id))
+
+    const closeModal = () => {
+        if(typeof document != 'undefined'){
+            setInfo(null)
+            const body = document.querySelector('body');
+            body.style.overflow = 'auto';
+        }
+    }
 
     return (
         <>
@@ -58,11 +68,17 @@ const MoviesList = () => {
                 <div className='row'>
                     {
                         filteredElements().map((item, index) => 
-                            <Card key={item?.id + index} item={item} toggle={() => toggleLike(item.id)} isLike={likes.findIndex(it => it == item.id) > -1}/>
+                            <Card key={item?.id + index} setInfo={(it) => setInfo(it)} item={item} toggle={() => toggleLike(item.id)} isLike={likes.findIndex(it => it == item.id) > -1}/>
                             )
                     }
                 </div>
             </div>
+            {
+                info ?
+                <Modal close={closeModal} info={info}/>
+                : null
+            }
+           
         </>
     )
 }
