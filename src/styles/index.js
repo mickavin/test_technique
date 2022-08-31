@@ -1,14 +1,3 @@
-export const moviesStyle = {
-    header: {
-        position: "relative",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: 'space-around',
-        border: "1px solid #888",
-        borderRadius: 8
-    }
-}
-
 export const inputStyle = {
     inputContainer: {
         position: "relative",
