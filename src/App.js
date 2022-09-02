@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import createStore, { persistConfig } from './store/configureStore';
 import {PersistGate} from 'redux-persist/es/integration/react';
 import crossBrowserListener from './utils/cross-browser-middleware';
-
+import { initialState } from 'store/reducers/likeReducer';
 
 function App() {
-  const store = createStore();
+  const store = createStore({...initialState});
   const persistedStore = persistStore(store);
   window.addEventListener('storage', crossBrowserListener(store, persistConfig));
 

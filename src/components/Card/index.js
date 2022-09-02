@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import generateImage from "api/generateImage";
 import './style.css';
 import noImage from '../../img/no-image.jpg';
-import loading from '../../img/loading.svg';
 import Rate from "components/Rate";
 import getDate from "utils/date";
 import getLanguage from "utils/language";
 import Like from "components/Like";
+import Loader from "components/Loader";
 
 export default (props) => {
     const item = props?.item
@@ -31,7 +31,7 @@ export default (props) => {
 
     return (
         <div className="col col-md-2 col-lg-4">
-            <a onClick={() => props?.setInfo({...item, image})} className="card card-movie">
+            <div onClick={() => props?.setInfo({...item, image})} className="card card-movie">
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
                         <div className="card-thumb">
@@ -43,9 +43,7 @@ export default (props) => {
                                     className="card-img-top h-100 w-100"
                                 />
                                 :
-                                <div className="divLoaderView">
-                                    <img className="svgLoaderView" src={loading} />
-                                </div>
+                                <Loader/>
                             }
                         
                         </div>
@@ -84,7 +82,7 @@ export default (props) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     )
 }

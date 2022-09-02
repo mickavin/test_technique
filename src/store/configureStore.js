@@ -14,21 +14,12 @@ export const persistConfig = {
 
 const persistingReducer = persistReducer(persistConfig,makeRootReducer());
 
-// a function which can create our store and auto-persist the data
 export default (initialState = {}) => {
-    // ======================================================
-    // Middleware Configuration
-    // ======================================================
+
     const middleware = [thunk];
 
-    // ======================================================
-    // Store Enhancers
-    // ======================================================
     const enhancers = [];
 
-    // ======================================================
-    // Store Instantiation
-    // ======================================================
     const store = legacy_createStore(
         persistingReducer,
         initialState,

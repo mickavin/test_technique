@@ -12,7 +12,6 @@ const LoginContainer = () => {
     const navigate = useNavigate()
 
     const onSubmit = data => {
-        console.log(isValid, data)
         if (isValid) {
             navigate('/movies-list')
         }

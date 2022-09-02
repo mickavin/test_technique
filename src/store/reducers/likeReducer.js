@@ -1,5 +1,5 @@
 import {TOGGLE_LIKE} from "../actions/toggleAction";
-const initialState = { likedMovies: [] }
+export const initialState = { likedMovies: [] }
 
 function toggleLike(state = initialState, action) {
   let nextState

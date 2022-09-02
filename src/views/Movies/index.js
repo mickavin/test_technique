@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import films from '../../data/list-de-films';
 import SimpleInput from 'components/SimpleInput';
 import SimpleSelect from "components/SimpleSelect";
-import Card from '../../components/Card';
+import Card from 'components/Card';
 import Modal from "components/Modal";
+import Loader from "components/Loader";
+import InfiniteScoller from 'react-infinite-scroller';
 import search from "utils/search";
 import sort from "utils/sort";
 import SORT_LABELS from "constants/sortLabels";
 import { toggleAction } from "store/actions/toggleAction";
-import { inputStyle } from "styles"; 
+import { inputStyle } from "styles";
+import glass from 'img/glass.svg' 
 import './style.css';
 
 const MoviesList = () => {
@@ -18,23 +21,37 @@ const MoviesList = () => {
     const [searchText, setSearchText] = useState('')
     const [sortType, setSortType] = useState('alphabetic')
     const [info, setInfo] = useState(null)
+    const [number, setNumber] = useState(6)
+    const [slicedMovies, setSlicedMovies] = useState(films.slice(0, 6))
 
-    const filteredElements = () => {
+    useEffect(() => {
+        if(typeof document != 'undefined'){
+            const el = document.querySelector("#container-infinite div")
+            const classes = el.classList
+            classes.add('row')
+        }
+    }, [])
+
+    useEffect(() => {
+        filteredElements(6)
+    }, [sortType])
+
+    const filteredElements = (numberOfElements = 6) => {
         let movies = search(searchText, films, [{type: 'number', key: 'id'}, {type: 'text', key: 'original_title'}, {type: 'text', key: 'overview'}])
         if(sortType == 'alphabetic'){
-            return sort(movies, 'text', 'original_title', true)
+            movies = sort(movies, 'text', 'original_title', true)
         } else if(sortType == 'alphabetic-desc'){
-            return sort(movies, 'text', 'original_title', false)
+            movies = sort(movies, 'text', 'origi[nal_title', false)
         } else if(sortType == 'popular'){
-            return sort(movies, 'number', 'popularity', true)
+            movies = sort(movies, 'number', 'pop]ularity', true)
         } else if(sortType == 'unpopular'){
-            return sort(movies, 'number', 'popularity', false)
+            movies = sort(movies, 'number', 'popularity', false)
         } else if(sortType == 'average'){
-            return sort(movies, 'number', 'vote_average', false)
+            movies = sort(movies, 'number', 'vote_average', false)
         } else if(sortType == 'average-desc'){
-            return sort(movies, 'number', 'vote_average', true)
+            movies = sort(movies, 'number', 'vote_average', true)
         }
-        return movies
+        setSlicedMovies(movies.slice(0, numberOfElements))
     }
 
     const toggleLike = (id) => dispatch(toggleAction(id))
@@ -47,6 +64,14 @@ const MoviesList = () => {
         }
     }
 
+    const loadMore = () => {
+        let numberOfElements = number + 6
+        setNumber(numberOfElements)
+        filteredElements(numberOfElements)
+    }
+
+    
+
     return (
         <>
             <div className='container'>
@@ -57,21 +82,29 @@ const MoviesList = () => {
                         </h5>
                     </div>
                     <div className="col col-md-2 col-lg-4">
-                        <SimpleInput styles={{...inputStyle.formControl, ...styles.formControl}} onChangeText={setSearchText} value={searchText} placeholder={"Rechercher un film"}/>
+                        <div className="input-with-button" style={styles.inputWithButton}>
+                            <SimpleInput styles={{...inputStyle.formControl, ...styles.formControl}} onChangeText={setSearchText} value={searchText} placeholder={"Rechercher un film"}/>
+                            <a onClick={filteredElements} style={styles.button}><img style={styles.imageButton} src={glass}/></a>
+                        </div>
                     </div>
                     <div className="col col-md-2 col-lg-4">
-                        <SimpleSelect styles={{...inputStyle.formControl, ...styles.formControl}} onChangeText={setSortType} value={sortType} placeholder={"Ranger par"} data={SORT_LABELS}/>
+                        <SimpleSelect styles={{...inputStyle.formControl, ...styles.formControl}} onChangeOption={setSortType} value={sortType} placeholder={"Ranger par"} data={SORT_LABELS}/>
                     </div>
                 </div>
             </div>
-            <div className='container'>
-                <div className='row'>
+            <div className='container' id="container-infinite">
+                <InfiniteScoller
+                  useWindow
+                  hasMore={films?.length != slicedMovies?.length}
+                  loadMore={loadMore}
+                  loader={<Loader width={80}/>}
+                >
                     {
-                        filteredElements().map((item, index) => 
-                            <Card key={item?.id + index} setInfo={(it) => setInfo(it)} item={item} toggle={() => toggleLike(item.id)} isLike={likes.findIndex(it => it == item.id) > -1}/>
-                            )
+                        slicedMovies.map((item, index) => 
+                        <Card key={item?.id + index} setInfo={(it) => setInfo(it)} item={item} toggle={() => toggleLike(item.id)} isLike={likes.findIndex(it => it == item.id) > -1}/>
+                        )
                     }
-                </div>
+                </InfiniteScoller>
             </div>
             {
                 info ?
@@ -89,6 +122,17 @@ const styles = {
         width: "200px",
         height: "30px !important",
         marginTop: "10px"
+    },
+    imageButton: {
+        height: "20px"
+    },
+    inputWithButton: {
+        position: 'relative'
+    },
+    button: {
+        position: 'absolute',
+        top: "10px",
+        left: "200px"
     }
 }
 

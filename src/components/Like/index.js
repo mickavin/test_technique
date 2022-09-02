@@ -2,7 +2,6 @@ import heart from '../../img/heart.svg';
 import heartOutline from '../../img/heart-outline.svg';
 
 export default (props) => {
-console.log(props)
     return (
         <>
             {
