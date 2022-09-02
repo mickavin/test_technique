@@ -31,10 +31,10 @@ export default (props) => {
 
     return (
         <div className="col col-md-2 col-lg-4">
-            <div onClick={() => props?.setInfo({...item, image})} className="card card-movie">
+            <div className="card card-movie">
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
-                        <div className="card-thumb">
+                        <div className="card-thumb"  onClick={() => props?.setInfo({...item, image})}>
                             {
                                 image ?
                                 <img
@@ -59,6 +59,7 @@ export default (props) => {
                         <h5>
                             <a
                             style={{ cursor: "pointer" }}
+                            onClick={() => props?.setInfo({...item, image})}
                             >
                             {item?.original_title}
                             </a>
