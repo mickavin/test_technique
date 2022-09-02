@@ -11,7 +11,7 @@ export default ({close, info}) => {
         }
     }, [])
     return (
-        <a onClick={() => close()} className='' style={modalStyles.backdrop}>
+        <div onClick={() => close()} className='' style={modalStyles.backdrop}>
             <div style={modalStyles.modal}>
                 <img className="w-100" src={info.image}/>
                 <div style={modalStyles.modalBody}>
@@ -30,21 +30,21 @@ export default ({close, info}) => {
                     </p>
                 </div> 
             </div>
-        </a>
+        </div>
     )
 }
 
 const modalStyles = {
     backdrop: {
-        position: "absolute", 
+        position: "fixed", 
         top: 0, 
         bottom: 0, 
         left: 0, 
         right: 0, 
-        backgroundColor:'rgba(0,0,0,0.5)',
+        backgroundColor:'rgba(0,0,0,0.8)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }, 
     modal: {
         overflow: "auto",

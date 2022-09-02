@@ -16,7 +16,7 @@ import glass from 'img/glass.svg'
 import './style.css';
 
 const MoviesList = () => {
-    const likes = useSelector(state => state.like.likedMovies)
+    const likes = useSelector(state => state?.like?.likedMovies) || []
     const dispatch = useDispatch()
     const [searchText, setSearchText] = useState('')
     const [sortType, setSortType] = useState('alphabetic')

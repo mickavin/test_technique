@@ -14,7 +14,7 @@ export const persistConfig = {
 
 const persistingReducer = persistReducer(persistConfig,makeRootReducer());
 
-export default (initialState = {}) => {
+export default (initialState = undefined) => {
 
     const middleware = [thunk];
 
