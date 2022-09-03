@@ -30,17 +30,20 @@ export default (props) => {
     }
 
     return (
-        <div className="col col-md-2 col-lg-4">
-            <div className="card card-movie">
+        <div className="col col-md-2 col-lg-3">
+            <div className="card card-movie" style={{width: "250px"}}>
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
-                        <div className="card-thumb"  onClick={() => props?.setInfo({...item, image})}>
+                        <a onClick={props?.toggle} className="like position-absolute">
+                            <Like isLike={props?.isLike ? props?.isLike : false}/>
+                        </a>
+                        <div className="card-thumb d-flex justify-content-center" onClick={() => props?.setInfo({...item, image})}>
                             {
                                 image ?
                                 <img
                                     src={image}
                                     alt="img"
-                                    className="card-img-top h-100 w-100"
+                                    className="card-img-top"
                                 />
                                 :
                                 <Loader/>
@@ -52,10 +55,8 @@ export default (props) => {
                         <span className="rate position-absolute">
                             <Rate rate={item?.vote_average ? item?.vote_average : 0}/>
                         </span>
-                        <a onClick={props?.toggle} className="like position-absolute">
-                            <Like isLike={props?.isLike ? props?.isLike : false}/>
-                        </a>
-                        <div style={{ height: "60%" }}>
+                        
+                        <div style={{ height: "60%", height: "100%" }}>
                         <h5>
                             <a
                             style={{ cursor: "pointer" }}

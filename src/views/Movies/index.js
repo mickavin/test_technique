@@ -14,6 +14,9 @@ import { toggleAction } from "store/actions/toggleAction";
 import { inputStyle } from "styles";
 import glass from 'img/glass.svg' 
 import './style.css';
+import HeaderDescription from "components/HeaderDescription";
+import Carousel from "components/Carousel";
+import catflix from 'img/catflix.svg';
 
 const MoviesList = () => {
     const likes = useSelector(state => state?.like?.likedMovies) || []
@@ -21,11 +24,13 @@ const MoviesList = () => {
     const [searchText, setSearchText] = useState('')
     const [sortType, setSortType] = useState('alphabetic')
     const [info, setInfo] = useState(null)
-    const [number, setNumber] = useState(6)
-    const [slicedMovies, setSlicedMovies] = useState(films.slice(0, 6))
+    const [number, setNumber] = useState(8)
+    const [slicedMovies, setSlicedMovies] = useState(films.slice(0, 8))
+    const [allMovies, setAllMovies] = useState(films)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if(typeof document != 'undefined'){
+        if(typeof document != 'undefined' && document.querySelector("#container-infinite div")){
             const el = document.querySelector("#container-infinite div")
             const classes = el.classList
             classes.add('row')
@@ -33,10 +38,10 @@ const MoviesList = () => {
     }, [])
 
     useEffect(() => {
-        filteredElements(6)
+        filteredElements(8)
     }, [sortType])
 
-    const filteredElements = (numberOfElements = 6) => {
+    const filteredElements = (numberOfElements = 8) => {
         let movies = search(searchText, films, [{type: 'number', key: 'id'}, {type: 'text', key: 'original_title'}, {type: 'text', key: 'overview'}])
         if(sortType == 'alphabetic'){
             movies = sort(movies, 'text', 'original_title', true)
@@ -52,6 +57,7 @@ const MoviesList = () => {
             movies = sort(movies, 'number', 'vote_average', true)
         }
         setSlicedMovies(movies.slice(0, numberOfElements))
+        setAllMovies(movies)
     }
 
     const toggleLike = (id) => dispatch(toggleAction(id))
@@ -65,15 +71,34 @@ const MoviesList = () => {
     }
 
     const loadMore = () => {
-        let numberOfElements = number + 6
+        setLoading(true)
+        let numberOfElements = number + 8
         setNumber(numberOfElements)
         filteredElements(numberOfElements)
+        setLoading(false)
     }
 
     
-
+    if(info){
+        return (
+            <>
+                <HeaderDescription close={closeModal} info={info}/>
+                <Carousel/>
+            </>
+        )
+    }
     return (
         <>
+        <nav className="navbar navbar-light bg-light mb-3">
+            <a className="navbar-brand" href="#">
+                <img
+                    alt="logo"
+                    src={catflix}
+                    style={{ height: 40 }}
+                />
+            </a>
+        </nav>
+        
             <div className='container'>
                 <div className='row'>
                     <div className="col col-md-2 col-lg-4">
@@ -95,9 +120,9 @@ const MoviesList = () => {
             <div className='container' id="container-infinite">
                 <InfiniteScoller
                   useWindow
-                  hasMore={films?.length != slicedMovies?.length}
+                  hasMore={allMovies?.length != slicedMovies?.length}
                   loadMore={loadMore}
-                  loader={<Loader width={80}/>}
+                  loader={loading ? <Loader width={80}/> : null}
                 >
                     {
                         slicedMovies.map((item, index) => 
@@ -106,11 +131,6 @@ const MoviesList = () => {
                     }
                 </InfiniteScoller>
             </div>
-            {
-                info ?
-                <Modal close={closeModal} info={info}/>
-                : null
-            }
            
         </>
     )
@@ -131,8 +151,8 @@ const styles = {
     },
     button: {
         position: 'absolute',
-        top: "10px",
-        left: "200px"
+        top: "5px",
+        left: "170px"
     }
 }
 

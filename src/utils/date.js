@@ -12,3 +12,12 @@ export default (date) => {
    }
    return ''
 }
+
+export const year = (date) => { 
+  const splitedDate = date.split('-')
+  if(splitedDate.length == 3){
+    const year = splitedDate[0]
+    return year
+  }
+  return ''
+}
