@@ -24,18 +24,19 @@ const MoviesList = () => {
     const [searchText, setSearchText] = useState('')
     const [sortType, setSortType] = useState('alphabetic')
     const [info, setInfo] = useState(null)
+    const [desc, setDesc] = useState(null)
     const [number, setNumber] = useState(8)
     const [slicedMovies, setSlicedMovies] = useState(films.slice(0, 8))
     const [allMovies, setAllMovies] = useState(films)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if(typeof document != 'undefined' && document.querySelector("#container-infinite div")){
+        if(typeof document != 'undefined' && !desc && document.querySelector("#container-infinite div") && !document.querySelector("#container-infinite div").classList.contains('row')){
             const el = document.querySelector("#container-infinite div")
             const classes = el.classList
             classes.add('row')
         }
-    }, [])
+    }, [desc])
 
     useEffect(() => {
         filteredElements(8)
@@ -70,6 +71,14 @@ const MoviesList = () => {
         }
     }
 
+    const closeDesc = () => {
+        if(typeof document != 'undefined'){
+            setDesc(null)
+            const body = document.querySelector('body');
+            body.style.overflow = 'auto';
+        }
+    }
+
     const loadMore = () => {
         setLoading(true)
         let numberOfElements = number + 8
@@ -79,10 +88,10 @@ const MoviesList = () => {
     }
 
     
-    if(info){
+    if(desc){
         return (
             <>
-                <HeaderDescription close={closeModal} info={info}/>
+                <HeaderDescription close={closeDesc} info={desc}/>
                 <Carousel/>
             </>
         )
@@ -108,8 +117,16 @@ const MoviesList = () => {
                     </div>
                     <div className="col col-md-2 col-lg-4">
                         <div className="input-with-button" style={styles.inputWithButton}>
-                            <SimpleInput styles={{...inputStyle.formControl, ...styles.formControl}} onChangeText={setSearchText} value={searchText} placeholder={"Rechercher un film"}/>
-                            <a onClick={filteredElements} style={styles.button}><img style={styles.imageButton} src={glass}/></a>
+                            <SimpleInput 
+                            styles={{...inputStyle.formControl, ...styles.formControl}} 
+                            onChangeText={setSearchText} 
+                            value={searchText} 
+                            placeholder={"Rechercher un film"}/>
+                            <a 
+                            onClick={filteredElements} 
+                            style={styles.button}>
+                                <img style={styles.imageButton} src={glass}/>
+                            </a>
                         </div>
                     </div>
                     <div className="col col-md-2 col-lg-4">
@@ -126,12 +143,22 @@ const MoviesList = () => {
                 >
                     {
                         slicedMovies.map((item, index) => 
-                        <Card key={item?.id + index} setInfo={(it) => setInfo(it)} item={item} toggle={() => toggleLike(item.id)} isLike={likes.findIndex(it => it == item.id) > -1}/>
+                        <Card 
+                        key={item?.id + index} 
+                        setInfo={(it) => setInfo(it)} 
+                        setDesc={(it) => setDesc(it)} 
+                        item={item} 
+                        toggle={() => toggleLike(item.id)} 
+                        isLike={likes.findIndex(it => it == item.id) > -1}/>
                         )
                     }
                 </InfiniteScoller>
             </div>
-           
+            {
+                info ?
+                <Modal close={closeModal} info={info}/>
+                : null
+            }
         </>
     )
 }

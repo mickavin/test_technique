@@ -34,10 +34,14 @@ export default (props) => {
             <div className="card card-movie" style={{width: "250px"}}>
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
-                        <a onClick={props?.toggle} className="like position-absolute">
+                        <a onClick={() => props?.setInfo({...item, image})} className="info position-absolute pointer d-flex justify-content-center">
+                            i
+                        </a>
+                        <a onClick={props?.toggle} className="like position-absolute pointer">
                             <Like isLike={props?.isLike ? props?.isLike : false}/>
                         </a>
-                        <div className="card-thumb d-flex justify-content-center" onClick={() => props?.setInfo({...item, image})}>
+
+                        <div className="card-thumb d-flex justify-content-center">
                             {
                                 image ?
                                 <img
@@ -52,6 +56,7 @@ export default (props) => {
                         </div>
                     </div>
                     <div className="card-content content w-100">
+                       
                         <span className="rate position-absolute">
                             <Rate rate={item?.vote_average ? item?.vote_average : 0}/>
                         </span>
@@ -60,7 +65,7 @@ export default (props) => {
                         <h5>
                             <a
                             style={{ cursor: "pointer" }}
-                            onClick={() => props?.setInfo({...item, image})}
+                            onClick={() => props?.setDesc({...item, image})}
                             >
                             {item?.original_title}
                             </a>
