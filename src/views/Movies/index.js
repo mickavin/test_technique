@@ -144,9 +144,9 @@ const MoviesList = () => {
                         <SimpleSelect styles={{...inputStyle.formControl, ...styles.formControl}} onChangeOption={setSortType} value={sortType} placeholder={"Ranger par"} data={SORT_LABELS}/>
                     </div>
                     <div className="col col-md-6 col-lg-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="favoriteCheck" onClick={() => setShowFavorites(!showFavorites)} checked={showFavorites}/>
-                            <label class="form-check-label" for="favoriteCheck">
+                        <div className="form-check">
+                            <input className="form-check-input" type="checkbox" id="favoriteCheck" onClick={() => setShowFavorites(!showFavorites)} checked={showFavorites}/>
+                            <label className="form-check-label" htmlFor="favoriteCheck">
                                 Afficher les favoris
                             </label>
                         </div>                    
