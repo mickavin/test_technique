@@ -55,10 +55,7 @@
     width: 280px;
     overflow: hidden;
 }
-/* .card-movie:hover .card-movie-thumb,
-img {
-    transition-duration: 0.3s;
-} */
+
 .card-movie-thumb {
     background-color: #000;
 }
@@ -139,15 +136,7 @@ img {
     top: 70%;
     height: 55%;
 }
-/* .card-movie:hover .card-content {
-    top: 50%;
-    height: 50%;
-}
-.card-movie:hover .card-movie-body {
-    position: absolute;
-    top: 50%;
-    transition-duration: 0.4s;
-} */
+
 .card-movie:hover .wout {
     background-color: #333 !important;
 }
