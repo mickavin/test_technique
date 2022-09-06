@@ -47,9 +47,9 @@ const MoviesList = () => {
         if(sortType == 'alphabetic'){
             movies = sort(movies, 'text', 'original_title', true)
         } else if(sortType == 'alphabetic-desc'){
-            movies = sort(movies, 'text', 'origi[nal_title', false)
+            movies = sort(movies, 'text', 'original_title', false)
         } else if(sortType == 'popular'){
-            movies = sort(movies, 'number', 'pop]ularity', true)
+            movies = sort(movies, 'number', 'popularity', true)
         } else if(sortType == 'unpopular'){
             movies = sort(movies, 'number', 'popularity', false)
         } else if(sortType == 'average'){

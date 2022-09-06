@@ -62,17 +62,16 @@ export default (props) => {
                         </span>
                         
                         <div style={{ height: "60%", height: "100%" }}>
-                        <h5>
                             <a
+                            className="font-weight-bold mb-2"
                             style={{ cursor: "pointer" }}
                             onClick={() => props?.setDesc({...item, image})}
                             >
-                            {item?.original_title}
+                                {item?.original_title}
                             </a>
-                        </h5>
                         {
                             getLanguage(item?.original_language) ?
-                            <p className="p-movie">
+                            <p className="p-movie mb-2">
                                 {getLanguage(item?.original_language)}
                             </p>
                         : null
@@ -80,7 +79,7 @@ export default (props) => {
                         
                         {
                             item?.release_date ?
-                            <p className="p-movie">
+                            <p className="p-movie mb-2">
                                 {getDate(item.release_date)}
                             </p>
                             : null
