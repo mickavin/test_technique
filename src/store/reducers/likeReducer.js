@@ -5,7 +5,7 @@ function toggleLike(state = initialState, action) {
   let nextState
   switch (action.type) {
     case TOGGLE_LIKE:
-      const likedMovieIndex = state.likedMovies.findIndex(item => item.id === action.value.id)
+      const likedMovieIndex = state.likedMovies.findIndex(item => item === action.value)
       if (likedMovieIndex !== -1) {
         nextState = {
           ...state,

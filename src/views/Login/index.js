@@ -11,7 +11,7 @@ const LoginContainer = () => {
     const {errors, isDirty, dirtyFields, isValid} = formState
     const navigate = useNavigate()
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
         if (isValid) {
             navigate(ROUTES.Movies)
         }
