@@ -17,6 +17,8 @@ import './style.css';
 import HeaderDescription from "components/HeaderDescription";
 import Carousel from "components/Carousel";
 import catflix from 'img/catflix.svg';
+import { Link } from "react-router-dom";
+import filter from "utils/filter";
 
 const MoviesList = () => {
     const likes = useSelector(state => state?.like?.likedMovies) || []
@@ -29,6 +31,7 @@ const MoviesList = () => {
     const [slicedMovies, setSlicedMovies] = useState(films.slice(0, 8))
     const [allMovies, setAllMovies] = useState(films)
     const [loading, setLoading] = useState(false)
+    const [showFavorites, setShowFavorites] = useState(false)
 
     useEffect(() => {
         if(typeof document != 'undefined' && !desc && document.querySelector("#container-infinite div") && !document.querySelector("#container-infinite div").classList.contains('row')){
@@ -40,7 +43,7 @@ const MoviesList = () => {
 
     useEffect(() => {
         filteredElements(8)
-    }, [sortType])
+    }, [sortType, showFavorites])
 
     const filteredElements = (numberOfElements = 8) => {
         let movies = search(searchText, films, [{type: 'number', key: 'id'}, {type: 'text', key: 'original_title'}, {type: 'text', key: 'overview'}])
@@ -56,6 +59,9 @@ const MoviesList = () => {
             movies = sort(movies, 'number', 'vote_average', false)
         } else if(sortType == 'average-desc'){
             movies = sort(movies, 'number', 'vote_average', true)
+        }
+        if(showFavorites){
+            movies = filter(movies, likes)
         }
         setSlicedMovies(movies.slice(0, numberOfElements))
         setAllMovies(movies)
@@ -98,15 +104,16 @@ const MoviesList = () => {
     }
     return (
         <>
-        <nav className="navbar navbar-light bg-light mb-3">
-            <a className="navbar-brand" href="#">
-                <img
-                    alt="logo"
-                    src={catflix}
-                    style={{ height: 40 }}
-                />
-            </a>
-        </nav>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
+            <Link to={'/'} className="navbar-brand">
+              <img
+                alt="logo"
+                src={catflix}
+                style={{ height: 40 }}
+              />
+            </Link>
+          
+          </nav>
         
             <div className='container'>
                 <div className='row'>
@@ -115,7 +122,11 @@ const MoviesList = () => {
                             Liste de films
                         </h5>
                     </div>
-                    <div className="col col-md-2 col-lg-4">
+                </div>
+            </div>
+            <div className='container'>
+                <div className='row'>
+                    <div className="col col-md-6 col-lg-4">
                         <div className="input-with-button" style={styles.inputWithButton}>
                             <SimpleInput 
                             styles={{...inputStyle.formControl, ...styles.formControl}} 
@@ -129,8 +140,16 @@ const MoviesList = () => {
                             </a>
                         </div>
                     </div>
-                    <div className="col col-md-2 col-lg-4">
+                    <div className="col col-md-6 col-lg-4">
                         <SimpleSelect styles={{...inputStyle.formControl, ...styles.formControl}} onChangeOption={setSortType} value={sortType} placeholder={"Ranger par"} data={SORT_LABELS}/>
+                    </div>
+                    <div className="col col-md-6 col-lg-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="favoriteCheck" onClick={() => setShowFavorites(!showFavorites)} checked={showFavorites}/>
+                            <label class="form-check-label" for="favoriteCheck">
+                                Afficher les favoris
+                            </label>
+                        </div>                    
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ export default ({info, close}) => {
     return (
         <div className="homepage-header" style={{backgroundImage: `url(${url})`}}>
         <div className="overlay" />
-        <nav className="navbar navbar-expand-lg navbar-dark lovemarket-nav">
+        <nav className="navbar navbar-expand-lg navbar-dark movies-nav">
           <div className="container">
             <a className="navbar-brand">
               <img
@@ -45,12 +45,12 @@ export default ({info, close}) => {
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <a className="nav-link" href="/categories">
-                    Categories
+                    Catégories
                   </a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/favorites">
-                    Favorites
+                    Favoris
                   </a>
                 </li>
               </ul>
