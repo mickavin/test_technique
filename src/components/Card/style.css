@@ -166,6 +166,10 @@
     color: #fff;
 }
 
+.info:hover{
+    color: #fff;
+}
+
 .like {
     right: 20px;
     top: 10px;

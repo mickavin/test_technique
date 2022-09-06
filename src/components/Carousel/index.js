@@ -60,12 +60,12 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
                 </a>
                 {
                     hasSeasons ? 
-                    episodes.map(i => 
-                        <CardCarousel item={i}/>
+                    episodes.map((i, index) => 
+                        <CardCarousel key={index} item={i}/>
                         )
                     :
-                    elements.map(i => 
-                        <Card item={i}/>
+                    elements.map((i, index)  => 
+                        <Card key={index} item={i}/>
                         )
                 }
 

@@ -34,7 +34,7 @@ export default (props) => {
             <div className="card card-movie" style={{width: "250px"}}>
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
-                        <a onClick={() => props?.setInfo({...item, image})} className="info position-absolute pointer d-flex justify-content-center">
+                        <a onClick={() => props?.setInfo({...item, image})} className="info position-absolute pointer d-flex justify-content-center pointer">
                             i
                         </a>
                         <a onClick={props?.toggle} className="like position-absolute pointer">
