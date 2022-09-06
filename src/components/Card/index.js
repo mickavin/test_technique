@@ -34,7 +34,7 @@ export default (props) => {
             <div className="card card-movie" style={{width: "250px"}}>
                 <div className="blog-grid w-100 rounded shadow">
                     <div className="position-relative">
-                        <a onClick={() => props?.setInfo({...item, image})} className="info position-absolute pointer d-flex justify-content-center pointer">
+                        <a onClick={() => props?.setInfo({...item, image})} className="info position-absolute pointer d-flex justify-content-center">
                             i
                         </a>
                         <a onClick={props?.toggle} className="like position-absolute pointer">
@@ -63,7 +63,7 @@ export default (props) => {
                         
                         <div style={{ height: "60%", height: "100%" }}>
                             <a
-                            className="font-weight-bold mb-2"
+                            className="font-weight-bold"
                             style={{ cursor: "pointer" }}
                             onClick={() => props?.setDesc({...item, image})}
                             >
@@ -71,7 +71,7 @@ export default (props) => {
                             </a>
                         {
                             getLanguage(item?.original_language) ?
-                            <p className="p-movie mb-2">
+                            <p className="p-movie mb-1 mt-1">
                                 {getLanguage(item?.original_language)}
                             </p>
                         : null
@@ -79,7 +79,7 @@ export default (props) => {
                         
                         {
                             item?.release_date ?
-                            <p className="p-movie mb-2">
+                            <p className="p-movie">
                                 {getDate(item.release_date)}
                             </p>
                             : null
