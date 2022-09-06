@@ -19,6 +19,7 @@ import Carousel from "components/Carousel";
 import catflix from 'img/catflix.svg';
 import { Link } from "react-router-dom";
 import filter from "utils/filter";
+import ROUTES from "constants/routes";
 
 const MoviesList = () => {
     const likes = useSelector(state => state?.like?.likedMovies) || []
@@ -105,7 +106,7 @@ const MoviesList = () => {
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
-            <Link to={'/'} className="navbar-brand">
+            <Link to={ROUTES.Home} className="navbar-brand">
               <img
                 alt="logo"
                 src={catflix}

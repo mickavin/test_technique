@@ -1,10 +1,10 @@
-import './App.css';
 import Router from './routes/index.js';
 import { persistStore } from 'redux-persist';
 import { Provider } from 'react-redux';
 import createStore, { persistConfig } from './store/configureStore';
 import {PersistGate} from 'redux-persist/es/integration/react';
 import crossBrowserListener from './utils/cross-browser-middleware';
+import './App.css';
 
 function App() {
   const store = createStore();

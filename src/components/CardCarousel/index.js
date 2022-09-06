@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import generateImage from "api/generateImage";
 import './style.css';
 import noImage from '../../img/no-image.jpg';
-import Rate from "components/Rate";
-import getDate from "utils/date";
-import getLanguage from "utils/language";
-import Like from "components/Like";
 import Loader from "components/Loader";
 
 export default (props) => {

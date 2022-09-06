@@ -44,12 +44,12 @@ export default ({info, close}) => {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="/categories">
+                  <a className="nav-link" href="#">
                     Catégories
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/favorites">
+                  <a className="nav-link" href="#">
                     Favoris
                   </a>
                 </li>

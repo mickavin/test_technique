@@ -4,6 +4,7 @@ import { LabelizeInput } from '../../components/LabelizeInput';
 import { useNavigate } from 'react-router-dom';
 import './style.css'
 import { inputStyle } from "styles"; 
+import ROUTES from 'constants/routes';
 
 const LoginContainer = () => {
     const { register, handleSubmit, formState, setFocus, getValues } = useForm();
@@ -13,7 +14,7 @@ const LoginContainer = () => {
 
     const onSubmit = data => {
         if (isValid) {
-            navigate('/movies-list')
+            navigate(ROUTES.Movies)
         }
     };
 
