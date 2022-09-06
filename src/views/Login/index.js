@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LabelizeInput } from '../../components/LabelizeInput';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +7,8 @@ import { inputStyle } from "styles";
 import ROUTES from 'constants/routes';
 
 const LoginContainer = () => {
-    const { register, handleSubmit, formState, setFocus, getValues } = useForm();
-    const {errors, isDirty, dirtyFields, submitCount, isValid} = formState
-    const [visibleModal, setVisibleModal] = useState(false)
+    const { register, handleSubmit, formState, setFocus } = useForm();
+    const {errors, isDirty, dirtyFields, isValid} = formState
     const navigate = useNavigate()
 
     const onSubmit = data => {

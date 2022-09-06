@@ -54,7 +54,6 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
                     <img
                         src={toLeft}
                         alt="img"
-                        className=""
                         style={styles.buttonIcon}
                     />
                 </a>
