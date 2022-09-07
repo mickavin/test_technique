@@ -12,7 +12,8 @@ const LoginContainer = () => {
     const navigate = useNavigate()
 
     const onSubmit = async data => {
-        if (isValid) {
+        const isValid2 = Object.keys(errors).length === 0
+        if (isValid || isValid2) {
             navigate(ROUTES.Movies)
         }
     };

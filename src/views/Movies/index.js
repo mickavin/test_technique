@@ -33,7 +33,6 @@ const MoviesList = () => {
     const [allMovies, setAllMovies] = useState(films)
     const [loading, setLoading] = useState(false)
     const [showFavorites, setShowFavorites] = useState(false)
-    console.log(likes, 'fef')
 
     useEffect(() => {
         if(typeof document != 'undefined' && !desc && document.querySelector("#container-infinite div") && !document.querySelector("#container-infinite div").classList.contains('row')){

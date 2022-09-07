@@ -1,4 +1,4 @@
-export const LabelizeInput = ({inputStyle, name, defaultValue, register, dirtyFields, errors, required, value, onChange}) => {
+export const LabelizeInput = ({inputStyle, name, defaultValue, register, dirtyFields, errors, required}) => {
     return (
         <div 
         id={`${name}-id`}
