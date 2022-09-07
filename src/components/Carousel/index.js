@@ -9,18 +9,18 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
     const goToRight = () => {
         if(typeof document != 'undefined'){
             document.getElementById('carousel-cards').scroll({
-                left: 300,
+                left: document.getElementById('carousel-cards').scrollLeft + 300,
                 behavior: 'smooth'
-              });
+            })
         }
     }
 
     const goToLeft = () => {
         if(typeof document != 'undefined'){
             document.getElementById('carousel-cards').scroll({
-                left: -300,
+                left: document.getElementById('carousel-cards').scrollLeft - 300,
                 behavior: 'smooth'
-              });
+            })
         }
     }
 
