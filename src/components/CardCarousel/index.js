@@ -26,7 +26,7 @@ export default (props) => {
     }
 
     return (
-        <div className="col-12 col-md-6 col-lg-4">
+        <div className="col-12 col-md-6 col-xl-3">
             <div className="card-with-description">
                 <div className="card card-movie m-0">
                     <div className="blog-grid w-100 rounded shadow">
