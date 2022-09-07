@@ -200,7 +200,8 @@ const styles = {
     button: {
         position: 'absolute',
         top: "5px",
-        left: "170px"
+        left: "170px",
+        cursor: 'pointer'
     }
 }
 
