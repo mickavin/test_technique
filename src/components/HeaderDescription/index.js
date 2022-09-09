@@ -1,4 +1,3 @@
-import './style.css';
 import catflix from 'img/catflix.svg';
 import image1 from 'img/image-1.jpg';
 import image2 from 'img/image-2.webp';
@@ -6,6 +5,7 @@ import image3 from 'img/image-3.jpg';
 import image4 from 'img/image-4.jpg';
 import { year } from 'utils/date';
 import back from 'img/back.svg';
+import { headerStyle } from 'styles';
 
 const urls = [
     image1,
@@ -19,9 +19,9 @@ const url = urls[Math.floor(Math.random() * urls.length)]
 
 export default ({info, close}) => {
     return (
-        <div className="homepage-header" style={{backgroundImage: `url(${url})`}}>
-        <div className="overlay" />
-        <nav className="navbar navbar-expand-lg navbar-dark movies-nav">
+        <div style={{backgroundImage: `url(${url})`, ...headerStyle.homepage_header}}>
+        <div className="overlay" style={headerStyle.overlay}/>
+        <nav className="navbar navbar-expand-lg navbar-dark" style={headerStyle.homepage_header__movies_nav}>
           <div className="container">
             <a className="navbar-brand">
               <img
@@ -44,7 +44,7 @@ export default ({info, close}) => {
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" href="#" style={headerStyle.homepage_header__movies_nav__nav_link}>
                     Catégories
                   </a>
                 </li>
@@ -59,19 +59,19 @@ export default ({info, close}) => {
         </nav>
         <a 
         onClick={close}
-        className="position-absolute back-button">
+        className="position-absolute" style={headerStyle.back_button}>
           <img
             alt="back"
             src={back}
             style={{ height: 20 }}
           />
         </a>
-        <section className="homepage-description-block">
+        <section style={headerStyle.homepage_description_block}>
       
           <div className="banner-overlay" />
-          <div className="description-block">
+          <div className="description-block" style={headerStyle.description_block}>
             <div className="d-flex flex-column">
-                <span className="text-shadow text-white font-weight-400 description-info">
+                <span className="text-shadow text-white" style={{...headerStyle.description_info, ...headerStyle.font_weigth_400}}>
                     Movies
                 </span>
                 <h3 className="mb-3 text-shadow text-white font-weight-normal">
@@ -80,12 +80,12 @@ export default ({info, close}) => {
                 <div className="flex-row mb-3 justify-content-around">
                     {
                         year(info?.release_date) ?
-                        <span className=" text-shadow text-white font-weight-200 description-info mr-3">
+                        <span className=" text-shadow text-white mr-3" style={{...headerStyle.description_info, ...headerStyle.font_weigth_200}}>
                             {year(info?.release_date)}
                         </span>
                         : null
                     }
-                    <span className=" text-shadow text-white font-weight-200 description-info mr-3">
+                    <span className=" text-shadow text-white mr-3" style={{...headerStyle.description_info, ...headerStyle.font_weigth_200}}>
                         Comedy
                     </span>
 

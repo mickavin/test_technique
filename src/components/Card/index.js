@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import generateImage from "api/generateImage";
-import './style.css';
 import noImage from '../../img/no-image.jpg';
 import Rate from "components/Rate";
 import getDate from "utils/date";

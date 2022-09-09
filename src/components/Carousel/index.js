@@ -1,9 +1,9 @@
-import './style.css';
 import CardCarousel from 'components/CardCarousel';
 import Card from 'components/Card';
 import episodes from 'data/episodes';
 import toLeft from 'img/to-left.svg';
 import toRight from 'img/to-right.svg';
+import { carouselStyle } from 'styles';
 
 export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => {
     const goToRight = () => {
@@ -25,7 +25,7 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
     }
 
     return (
-        <div className="carousel w-100 p-7 pt-2">
+        <div className="w-100 p-7 pt-2" style={{...carouselStyle.carousel, ...carouselStyle.p_7}}>
             <div className="flex-row d-flex">
                 <h5 className='text-white m-2'>
                     {title} 
@@ -33,13 +33,13 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
                 {
                     hasSeasons ?
                     <div className='flex-row d-flex'>
-                        <div className='season-number-selected justify-content-center d-flex align-items-center'>
+                        <div className='justify-content-center d-flex align-items-center' style={carouselStyle.season_number_selected}>
                             1 
                         </div>  
-                        <div className='season-number justify-content-center d-flex align-items-center'>
+                        <div className='justify-content-center d-flex align-items-center' style={carouselStyle.season_number}>
                             2
                         </div> 
-                        <div className='season-number justify-content-center d-flex align-items-center'>
+                        <div className='justify-content-center d-flex align-items-center'  style={carouselStyle.season_number}>
                             3
                         </div> 
                     </div> 
@@ -47,7 +47,7 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
                 }
                 
             </div>
-            <div id="carousel-cards" className='overflow-auto d-flex flex-row carousel-cards'>
+            <div id="carousel-cards" className='overflow-auto d-flex flex-row' style={carouselStyle.carousel_cards}>
                 <a 
                 onClick={goToLeft}
                 style={styles.leftButton}>
@@ -86,14 +86,14 @@ export default ({elements = episodes, title = "Seasons", hasSeasons = true}) => 
 const styles = {
     leftButton: {
         position: "absolute", 
-        left: 5,
+        left: "15px",
         top: "50%", 
         marginTop: "-20px",
         cursor: 'pointer'
     },
     rightButton: {
         position: "absolute", 
-        right: 5,
+        right: "15px",
         top: "50%", 
         marginTop: "-20px",
         cursor: 'pointer'

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LabelizeInput } from '../../components/LabelizeInput';
 import { useNavigate } from 'react-router-dom';
-import './style.css'
 import { inputStyle } from "styles"; 
 import ROUTES from 'constants/routes';
 

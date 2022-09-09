@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import generateImage from "api/generateImage";
-import './style.css';
+import { cardCarouselStyle } from "styles";
 import noImage from '../../img/no-image.jpg';
 import Loader from "components/Loader";
 
@@ -27,11 +27,11 @@ export default (props) => {
 
     return (
         <div className="col-12 col-md-6 col-xl-3">
-            <div className="card-with-description">
-                <div className="card card-movie m-0">
-                    <div className="blog-grid w-100 rounded shadow">
+            <div style={cardCarouselStyle.card_with_description}>
+                <div className="m-0" style={cardCarouselStyle.card_with_description__card}>
+                    <div className="w-100 rounded shadow">
                         <div className="position-relative">
-                            <div className="card-thumb">
+                            <div style={cardCarouselStyle.card_with_description__card_thumb}>
                                 {
                                     image ?
                                     <img
@@ -51,7 +51,7 @@ export default (props) => {
                     <h6 className="text-white m-1">
                         {item?.id}. {item?.title}
                     </h6>
-                    <p className="text-white-70 m-1">
+                    <p className="text-white-70 m-1" style={cardCarouselStyle.text_white_70}>
                         {item?.description}
                     </p>
                 </div>

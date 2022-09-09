@@ -1,9 +1,10 @@
 import loading from '../../img/loading.svg';
+import { loaderStyle } from 'styles';
 
 export default ({width=20}) => {
     return (
-        <div className="divLoaderView">
-            <img className="svgLoaderView" src={loading} width={width}/>
+        <div style={loaderStyle.divLoaderView}>
+            <img style={loaderStyle.svgLoaderView} src={loading} width={width}/>
         </div>
     )
 }

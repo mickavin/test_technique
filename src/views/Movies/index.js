@@ -13,7 +13,6 @@ import SORT_LABELS from "constants/sortLabels";
 import { toggleAction } from "store/actions/toggleAction";
 import { inputStyle } from "styles";
 import glass from 'img/glass.svg' 
-import './style.css';
 import HeaderDescription from "components/HeaderDescription";
 import Carousel from "components/Carousel";
 import catflix from 'img/catflix.svg';
